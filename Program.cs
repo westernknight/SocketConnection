@@ -15,19 +15,21 @@ namespace SocketConnection
                 {
                     Console.WriteLine(body_data);
                 };
-            ss.Start(5656);
+            ss.Start(5956);
 
             Thread.Sleep(1000);
 
             SocketClient sc = new SocketClient();
-            sc.Start("127.0.0.1", 5656);
+            sc.Start("192.168.0.113", 5956);
 
             Thread.Sleep(1000);
             string json = "fghfdhfdhgfhdfhfgh";
-            sc.SendPackage(json);
-        
+
+
             while (true)
             {
+                sc.SendPackage(json);
+
                 Thread.Sleep(1000);
             }
 

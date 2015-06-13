@@ -11,11 +11,13 @@ using System.Threading;
 
 namespace SocketConnection
 {
-    class SocketClient : SocketConnection
+    public class SocketClient : SocketConnection
     {
         string ip;
         int port;
         bool netExit = false;//manager不在线是否重拨
+        public bool isConnect = false;
+
         public void Start(string ip, int port)
         {
 
@@ -37,7 +39,7 @@ namespace SocketConnection
 
                 socket.BeginReceive(tmpData, 0, tmpData.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), socket);
                 Msg("connect  [" + ip + ":" + port + "] success");
-
+                isConnect = true;
                 //byte[] inValue = new byte[] { 1, 0, 0, 0, 0x88, 0x13, 0, 0, 0x88, 0x13, 0, 0 };
                 //socketClient.IOControl(IOControlCode.KeepAliveValues, inValue, null);
             }
@@ -64,11 +66,28 @@ namespace SocketConnection
             {
                 if (socket.Connected)
                 {
+
                     byte [] data = Encoding.UTF8.GetBytes(jsonData);
                     byte[] send_data_with_length = BuildPack(BitConverter.GetBytes(data.Length), data);
                     socket.Send(send_data_with_length);
+
                 }
                 
+            }
+
+        }
+        public void SendPackage(byte[] data)
+        {
+            if (socket != null)
+            {
+                if (socket.Connected)
+                {
+
+                    byte[] send_data_with_length = BuildPack(BitConverter.GetBytes(data.Length), data);
+                    socket.Send(send_data_with_length);
+
+                }
+
             }
 
         }

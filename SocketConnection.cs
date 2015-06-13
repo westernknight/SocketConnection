@@ -7,7 +7,7 @@ using System.Net;
 
 namespace SocketConnection
 {
-    class SocketConnection
+    public class SocketConnection
     {
         protected Socket socket;
         protected byte[] tmpData = new byte[1000 * 1024];

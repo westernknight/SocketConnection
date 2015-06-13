@@ -10,7 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SocketConnection
 {
-    class SocketServer : SocketConnection
+    public class SocketServer : SocketConnection
     {
         List<Socket> socketList = new List<Socket>();
         
@@ -113,9 +113,57 @@ namespace SocketConnection
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }
-            
+            }           
 
         }
+        public void SendPackage(int socketid, byte[] data)
+        {
+
+            try
+            {
+                Socket socket = socketList[socketid];
+                if (socket != null)
+                {
+                    if (socket.Connected)
+                    {
+                        byte[] send_data_with_length = BuildPack(BitConverter.GetBytes(data.Length), data);
+                        socket.Send(send_data_with_length);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+
+        public void BoardcastMessage(byte[] data)
+        {
+
+            try
+            {
+                for (int socketid = 0; socketid < socketList.Count; socketid++)
+                {
+                    Socket socket = socketList[socketid];
+                    if (socket != null)
+                    {
+                        if (socket.Connected)
+                        {
+                            byte[] send_data_with_length = BuildPack(BitConverter.GetBytes(data.Length), data);
+                            socket.Send(send_data_with_length);
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+      
     }
 }

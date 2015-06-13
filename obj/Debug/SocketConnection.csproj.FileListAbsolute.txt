@@ -2,3 +2,4 @@ D:\zhangjiajun\studio\SocketConnection\trunk\bin\Debug\SocketConnection.exe
 D:\zhangjiajun\studio\SocketConnection\trunk\bin\Debug\SocketConnection.pdb
 D:\zhangjiajun\studio\SocketConnection\trunk\obj\Debug\SocketConnection.exe
 D:\zhangjiajun\studio\SocketConnection\trunk\obj\Debug\SocketConnection.pdb
+D:\zhangjiajun\studio\SocketConnection\trunk\obj\Debug\SocketConnection.csprojResolveAssemblyReference.cache
